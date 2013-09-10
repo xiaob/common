@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="conf.xsl"?>
+
+<!-- Do not modify this file directly.  Instead, copy entries that you -->
+<!-- wish to modify from this file into vertical-user.xml and change them -->
+<!-- there.  If vertical-user.xml does not already exist, create it.      -->
+
+<configuration>
+
+<property>
+  <name a="1">host</name> 
+  <value>http://192.168.3.249</value>
+  <description>移动OA源系统主机地址</description>
+</property>
+
+<property>
+  <name>login</name>
+  <value>/page/Default.aspx</value>
+  <description>登陆页面</description>
+</property>
+
+<property>
+  <name>resource</name>
+  <value>/service/resource/AllResList.aspx</value>
+  <description>资源管理页面</description>
+</property>
+
+
+<property>
+  <name>userInfo</name>
+  <value>/wmis/linkman/Deptmanage/Dept_User_List.aspx</value>
+  <description>系统功能页面</description>
+</property>
+<property>
+  <name>userInfoEdit</name>
+  <value>/wmis/linkman/usermanage/UserEdit/EditUser.aspx?userid=</value>
+  <description>用户基本信息修改页面</description>
+</property>
+<property>
+  <name>departmentQuery</name>
+  <value>/wmis/linkman/Deptmanage/GroupList.aspx</value>
+  <description>显示所有部门页面</description>
+</property>
+<property>
+  <name>departmentUserQuery</name>
+  <value>/wmis/linkman/Deptmanage/Dept_User_List.aspx?deptid=</value>
+  <description>显示当前部门所有人员页面</description>
+</property>
+
+
+<property>
+  <name>docwrite</name>
+  <value>/service/messages/sendDraftMsg.aspx?msgtype=64</value>
+  <description>公文起草页面</description>
+</property>
+
+<property>
+  <name>selectuser</name>
+  <value>/wmis/linkman/Deptmanage/GroupList.aspx</value>
+  <description>选择用户页面</description>
+</property>
+
+<property>
+  <name>draftbox</name>
+  <value>/service/messages/msglist.aspx?msgtype=64</value>
+  <description>草稿箱页面</description>
+</property>
+
+<property>
+  <name>docsend</name>
+  <value>/service/messages/sendNewMsg.aspx?msgtype=2</value>
+  <description>公文发文页面</description>
+</property>
+
+
+<property>
+  <name>docrecelist</name>
+  <value>/service/messages/msglist.aspx?msgtype=2&amp;sendtype=2</value>
+  <description>公文收件箱页面</description>
+</property>
+
+<property>
+  <name>docsendlist</name>
+  <value>/service/messages/msglist.aspx?msgtype=2&amp;sendtype=1</value>
+  <description>公文发件箱页面</description>
+</property>
+
+<property>
+  <name>showmessage</name>
+  <value>/service/messages/message/show_message.aspx</value>
+  <description>讨论查看页面</description>
+</property>
+
+<property>
+  <name>showmsgfile</name>
+  <value>/service/messages/message/show_message_file.aspx</value>
+  <description>讨论附件查看页面</description>
+</property>
+
+<property>
+  <name>displayfile</name>
+  <value>/inc/displayfile.ashx</value>
+  <description>讨论附件查看页面</description>
+</property>
+
+
+</configuration>

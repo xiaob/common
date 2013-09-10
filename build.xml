@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<project name="yuan-common" basedir=".">  
+	<description>yuan-common jar</description>  
+	
+	<!-- 键盘控制台打包任务 -->  
+	<target name="keyconsole" description="make jar file">  
+		<jar jarfile="keyconsole.jar" basedir="bin">  
+			<manifest>   
+				<attribute name="Main-Class" value="com.yuan.common.swing.KeyConsole" /> 
+			</manifest>  
+			<fileset dir="bin/com/yuan/common/swing">
+			    <include name="KeyConsole*"/>
+			    <include name="ImplAWTEventListener"/>
+			    <include name="GlobalKeyListener"/>
+			</fileset>
+		</jar>  
+	</target>  
+    
+</project>  
