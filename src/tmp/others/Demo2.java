@@ -28,7 +28,7 @@ public class Demo2 {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2013, 0, 1, 0, 0, 0);
 		System.out.println(calendar.getTime().getTime());
-		System.out.println(calendar.getTime().toLocaleString());
+//		System.out.println(calendar.getTime().toLocaleString());
 	}
 	
 	public static void test1(){

@@ -102,7 +102,7 @@ public class Demo1 {
 		}
 	}
 	public static void test8(){
-		String s = "\\u5c0f\\u8d44\\u5973\\u5b69\\u5411\\u524d\\u51b2(\\u90b1\\u6cfd\\/\\u90ed\\u4e66\\u7476)\\uff08\\u7b2c1\\u96c6\\uff09";
+//		String s = "\\u5c0f\\u8d44\\u5973\\u5b69\\u5411\\u524d\\u51b2(\\u90b1\\u6cfd\\/\\u90ed\\u4e66\\u7476)\\uff08\\u7b2c1\\u96c6\\uff09";
 		String s1 = "\\u5c0f\\u8d44\\u5973\\u5b69\\u5411\\u524d\\u51b2";
 		String s2 = "\\u90b1\\u6cfd";
 		String s3 = "\\u90ed\\u4e66\\u7476";

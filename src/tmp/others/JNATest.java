@@ -72,10 +72,10 @@ public class JNATest {
 		timezone.ByReference tz = new timezone.ByReference();
 		
 //		CLibrary.INSTANCE.gettimeofday(ti, tz);
-//		System.out.println(ti.tv_sec.longValue());
+		System.out.println(ti.tv_sec.longValue());
 //		System.out.println(ti.tv_usec.longValue());
 //		System.out.println(tz.tz_minuteswest);
-//		System.out.println(tz.tz_dsttime);
+		System.out.println(tz.tz_dsttime);
 	}
 	
 	public interface Kernel32 extends Library{

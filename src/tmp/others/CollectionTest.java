@@ -45,10 +45,11 @@ public class CollectionTest {
 //		l2.add(2);
 		
 		List<Integer> l3 = Collections.singletonList(3);
-//		l3.add(4);
+		l3.add(4);
 		
 		List<Integer> l4 = Collections.emptyList();
 		List<Integer> l5 = new ArrayList<Integer>(Collections.nCopies(5, 0));
+		System.out.println(l4);
 		System.out.println(l5);
 	}
 	
@@ -241,11 +242,11 @@ public class CollectionTest {
 			show(Thread.currentThread().getName() + " take");
 			putSemaphore.release();
 		}
-		public void put() throws InterruptedException{
-			putSemaphore.acquire();
-			show(Thread.currentThread().getName() + "put");
-			takeSemaphore.release();
-		}
+//		public void put() throws InterruptedException{
+//			putSemaphore.acquire();
+//			show(Thread.currentThread().getName() + "put");
+//			takeSemaphore.release();
+//		}
 	}
 	
 	public static void testBarrier(){
