@@ -8,7 +8,7 @@ public class AnnotationTool {
 	private String className;
 
 	public static void main(String[] args)throws Exception {
-		AnnotationTool tool = new AnnotationTool("annotation.Testing");
+		AnnotationTool tool = new AnnotationTool("com.yuan.common.annotation.Testing");
 		tool.parse();
 	}
 	

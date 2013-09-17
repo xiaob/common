@@ -1,10 +1,13 @@
 package com.yuan.common.annotation;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.lang.model.element.Modifier;
 @MyClass
+@Resource
 public class Testing {
 	@MyField
+	@Resource
 	private String name;
 	@MyMethod
 	public void go(){
