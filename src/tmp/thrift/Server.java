@@ -1,5 +1,7 @@
 package tmp.thrift;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -49,8 +51,25 @@ class Handler implements SecondService.Iface {
 	@Override
 	public String testString(String thing) throws TException {
 		System.out.println(thing);
+		final AsyncCall<String> asyncMethod = new AsyncCall<String>();
 		
-		return "testString";
+		new Thread(){
+			public void run(){
+				try {
+					TimeUnit.SECONDS.sleep(5);
+					asyncMethod.getFinisher().finish("testString");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		
+		try {
+			return asyncMethod.getFuture().get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

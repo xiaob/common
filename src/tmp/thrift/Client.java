@@ -22,7 +22,6 @@ public class Client {
         System.out.println(client.testString("1111"));
         
         transport.close(); 
-
 	}
 
 }
