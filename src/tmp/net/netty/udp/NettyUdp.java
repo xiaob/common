@@ -1,13 +1,10 @@
-package tmp.net.netty;
+package tmp.net.netty.udp;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
 import org.jboss.netty.bootstrap.ConnectionlessBootstrap;
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.ChannelBuffers;
-import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
@@ -17,8 +14,6 @@ import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.DatagramChannel;
 import org.jboss.netty.channel.socket.nio.NioDatagramChannelFactory;
 import org.jboss.netty.handler.codec.frame.FixedLengthFrameDecoder;
-import org.jboss.netty.handler.codec.frame.FrameDecoder;
-import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
 
 /**
  * 但对 UDP 的开发可与 TCP 相差较大。首先，UDP 是无连接的，因此，必须自己在应用层考虑并实现数据传输的可靠性， 比如顺序、丢包检测、重发等等。在
@@ -41,14 +36,14 @@ public class NettyUdp {
 	private ConnectionlessBootstrap b;
 	private DatagramChannel datagramChannel;
 
-	public NettyUdp(int size) {
+	public NettyUdp(int port, int size) {
 		super();
 		this.size = size;
 		
-		init();
+		init(port);
 	}
 	
-	private void init(){
+	private void init(int port){
 		b = new ConnectionlessBootstrap(new NioDatagramChannelFactory(Executors.newCachedThreadPool()));
 
 		b.setOption("tcpNoDelay", true);
@@ -66,25 +61,18 @@ public class NettyUdp {
 				return pipeline;
 			}
 		});
-	}
-
-	public void start(int port) {
-		b.bind(new InetSocketAddress(port));
+		
+		datagramChannel = (DatagramChannel) b.bind(new InetSocketAddress(port));
 		System.out.println(" Server is starting ……");
 	}
 	
-	public void connect(String host, int port){
-		datagramChannel = (DatagramChannel) b.connect(new InetSocketAddress(host, port))
-				.awaitUninterruptibly().getChannel();
-	}
-
-	public void writeString(String message) {
-		datagramChannel.write(message);
+	public void writeString(String message, String remoteHost, int remotePort) {
+		datagramChannel.write(message, new InetSocketAddress(remoteHost, remotePort));
 	}
 
 	public static void main(String[] args) throws IOException {
-		NettyUdp nettyUdp = new NettyUdp(100);
-		nettyUdp.start(1000);
+		new NettyUdp(1000, 100);
+		
 	}
 	
 	public void shutdown(){
@@ -93,58 +81,6 @@ public class NettyUdp {
 		}
 		if(b != null){
 			b.releaseExternalResources();
-		}
-	}
-
-}
-
-class UDPDecoder extends FrameDecoder {
-
-	private int size;
-
-	public UDPDecoder(int size) {
-		super();
-		this.size = size;
-	}
-
-	@Override
-	protected Object decode(ChannelHandlerContext ctx, Channel channel, ChannelBuffer buffer) throws Exception {
-		byte[] body = new byte[size];
-		buffer.readBytes(body);
-
-		return new String(body, "UTF-8").trim();
-	}
-}
-
-class UDPEncoder extends OneToOneEncoder {
-
-	public static final char BLANK = ' ';
-
-	private int size;
-
-	public UDPEncoder(int size) {
-		super();
-		this.size = size;
-	}
-
-	@Override
-	protected Object encode(ChannelHandlerContext ctx, Channel channel, Object msg) throws Exception {
-		if(!(msg instanceof String)){
-			return msg;
-		}
-		
-		String message = (String) msg;
-		byte[] body = message.getBytes("UTF-8");
-
-		ChannelBuffer buf = ChannelBuffers.dynamicBuffer();
-		buf.writeBytes(body);
-		fill(buf, size - body.length);
-		return buf;
-	}
-
-	private void fill(ChannelBuffer buf, int size) {
-		for (int i = 0; i < size; i++) {
-			buf.writeByte(BLANK);
 		}
 	}
 

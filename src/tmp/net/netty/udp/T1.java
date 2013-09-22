@@ -1,11 +1,11 @@
-package tmp.net.netty;
+package tmp.net.netty.udp;
+
 
 
 public class T1 {
 
 	public static void main(String[] args) throws Exception {
-		NettyUdp server = new NettyUdp(100);
-		server.start(1000);
+		new NettyUdp(1000, 100);
 
 	}
 
