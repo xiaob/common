@@ -4,7 +4,7 @@ package tmp.thrift;
 public class AsyncCall<T> {
 
 	private T result;
-	private final Object lock = new Object();
+	private Object lock = new Object();
 	
 	public Future getFuture(){
 		return new Future();
