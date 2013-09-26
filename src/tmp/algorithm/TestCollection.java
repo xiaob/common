@@ -3,15 +3,30 @@ package tmp.algorithm;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class TestCollection {
 
 	public static void main(String[] args) {
-		testCollection();
-
+//		testCollection();
+		test1();
 	}
+	
+	public static void test1(){
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(11);
+		list.add(22);
+		System.out.println(list);
+		
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(33);
+		set.add(44);
+		System.out.println(set);
+	}
+	
 	public static void testList(){
 		List<String> list = new ArrayList<String>();
 		list.add("1");
