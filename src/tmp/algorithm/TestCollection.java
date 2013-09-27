@@ -7,12 +7,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.SynchronousQueue;
 
 public class TestCollection {
 
 	public static void main(String[] args) {
 //		testCollection();
-		test1();
+		test2();
 	}
 	
 	public static void test1(){
@@ -64,6 +65,11 @@ public class TestCollection {
 		list.add(4);
 		setList.addAll(list);
 		System.out.println(setList);
+	}
+	
+	public static void test2(){
+		SynchronousQueue<String> queue = new SynchronousQueue<String>();
+		System.out.println(queue.offer("1111"));
 	}
 	
 }

@@ -51,13 +51,13 @@ class Handler implements SecondService.Iface {
 	@Override
 	public String testString(String thing) throws TException {
 		System.out.println(thing);
-		final AsyncCall<String> asyncMethod = new AsyncCall<String>();
+		final SyncValue<String> syncValue = new SyncValue<String>();
 		
 		new Thread(){
 			public void run(){
 				try {
 					TimeUnit.SECONDS.sleep(5);
-					asyncMethod.getFinisher().finish("testString");
+					syncValue.put("testString");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -65,7 +65,7 @@ class Handler implements SecondService.Iface {
 		}.start();
 		
 		try {
-			return asyncMethod.getFuture().get();
+			return syncValue.get(3, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
