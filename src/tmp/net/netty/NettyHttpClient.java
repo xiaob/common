@@ -17,7 +17,6 @@ import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.handler.codec.http.DefaultHttpRequest;
-import org.jboss.netty.handler.codec.http.HttpChunk;
 import org.jboss.netty.handler.codec.http.HttpChunkAggregator;
 import org.jboss.netty.handler.codec.http.HttpClientCodec;
 import org.jboss.netty.handler.codec.http.HttpMethod;
@@ -97,16 +96,12 @@ class ClientHandler extends SimpleChannelUpstreamHandler{
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
 			throws Exception {
-		if(e.getMessage() instanceof HttpChunk){
-			
-		}else{
-			HttpResponse response = (HttpResponse) e.getMessage();
-			String result = response.getContent().toString(Charset.forName("UTF-8"));
-			try {
-				queue.put(result);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+		HttpResponse response = (HttpResponse) e.getMessage();
+		String result = response.getContent().toString(Charset.forName("UTF-8"));
+		try {
+			queue.put(result);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
 	
