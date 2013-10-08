@@ -23,13 +23,17 @@ public class SyncValue<T> {
 	public T get(long timeout, TimeUnit unit) throws InterruptedException {
 		synchronized (lock) {
 			if(finish.get()){
+				// 标志位重置以便下一次使用
+				finish.set(false);
 				return result;
 			}
 			// 必须设置超时, 不能无限等下去
 			lock.wait(TimeUnit.MILLISECONDS.convert(timeout, unit));
+			
+			// 标志位重置以便下一次使用
+			finish.set(false);
+			return result;
 		}
-		
-		return result;
 	}
 	
 	public void put(T t) {

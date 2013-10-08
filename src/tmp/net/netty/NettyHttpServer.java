@@ -21,10 +21,9 @@ import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpHeaders;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.jboss.netty.handler.codec.http.HttpRequest;
-import org.jboss.netty.handler.codec.http.HttpRequestDecoder;
 import org.jboss.netty.handler.codec.http.HttpResponse;
-import org.jboss.netty.handler.codec.http.HttpResponseEncoder;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
+import org.jboss.netty.handler.codec.http.HttpServerCodec;
 import org.jboss.netty.handler.codec.http.HttpVersion;
 import org.jboss.netty.handler.codec.http.QueryStringDecoder;
 import org.jboss.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
@@ -38,7 +37,7 @@ import com.alibaba.fastjson.JSON;
 public class NettyHttpServer {
 	
 	public static void main(String[] args) {
-		start(80);
+		start(81);
 
 	}
 	
@@ -57,8 +56,9 @@ public class NettyHttpServer {
 		public ChannelPipeline getPipeline() throws Exception {
 			// Create a default pipeline implementation.
 			ChannelPipeline pipeline = Channels.pipeline();
-			pipeline.addLast("decoder", new HttpRequestDecoder());
-			pipeline.addLast("encoder", new HttpResponseEncoder());
+//			pipeline.addLast("decoder", new HttpRequestDecoder());
+//			pipeline.addLast("encoder", new HttpResponseEncoder());
+			pipeline.addLast("codec", new HttpServerCodec());
 			//http处理handler
 			pipeline.addLast("handler", new AdminServerHandler());
 			return pipeline;
