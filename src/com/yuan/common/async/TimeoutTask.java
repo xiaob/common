@@ -115,7 +115,7 @@ public abstract class TimeoutTask<T> implements Runnable {
 		Iterator<DelayItem<T>> it = timeoutQueue.iterator();
 		while(it.hasNext()){
 			DelayItem<T> delayItem = it.next();
-			if(delayItem.getItem() == submit){
+			if(delayItem.getItem().equals(submit)){
 				
 				return delayItem;
 			}
