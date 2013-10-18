@@ -1,4 +1,4 @@
-package tmp.others;
+package tmp.algorithm;
 
 public class ChatStat {
 

@@ -1,4 +1,4 @@
-package tmp.dirt;
+package com.yuan.common.algorithm;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +16,7 @@ import multi.patt.match.ac.SearchResult;
  * @author yuan<cihang.yuan@happyelements.com>
  *
  */
-public class DirtWordService {
+public class DirtWordFilter {
 
 	private AhoCorasick tree;
 	/**
@@ -24,7 +24,7 @@ public class DirtWordService {
 	 */
 	private String dictFile;
 	
-	public DirtWordService(String dictFile){
+	public DirtWordFilter(String dictFile){
 		this.dictFile = dictFile;
 		tree = new AhoCorasick();
 	}

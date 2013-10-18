@@ -1,4 +1,4 @@
-package com.yuan.common.util;
+package com.yuan.common.algorithm;
 
 import java.util.Arrays;
 import java.util.Comparator;

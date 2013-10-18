@@ -1,13 +1,22 @@
-package tmp.algorithm;
+package com.yuan.common.algorithm;
 
-public class TestPrime {
+/**
+ * 关于素数的两个算法
+ * @author yuan<cihang.yuan@happyelements.com>
+ *
+ */
+public class Prime {
 
 	public static void main(String[] args) {
 		System.out.println(sumPrime(1000));
 		System.out.println(Integer.toBinaryString(-128));
 	}
 	
-	//筛法求质数之和
+	/**
+	 * 筛法求N以内素数之和
+	 * @param N
+	 * @return
+	 */
 	public static long sumPrime(int N){
 		long sum = 0;
 		int[] numbers = new int[N + 1];
@@ -31,6 +40,13 @@ public class TestPrime {
 		return sum;
 		
 	}
+	/**
+	 * 是否素数
+	 * 
+	 * 只需要判断从2到根号N是否能除尽即可
+	 * @param number
+	 * @return
+	 */
 	public static boolean isPrimeNumber(int number){
 		if(number < 2){
 			return false;
