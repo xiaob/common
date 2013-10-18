@@ -1,4 +1,4 @@
-package tmp.net.socket.udp;
+package com.yuan.common.udp;
 
 import java.net.DatagramPacket;
 

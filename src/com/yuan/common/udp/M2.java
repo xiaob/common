@@ -1,9 +1,9 @@
-package tmp.net.socket.udp;
+package com.yuan.common.udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 
-public class M1 {
+public class M2 {
 
 	public static void main(String[] args) throws IOException {
 		test2();
@@ -26,27 +26,26 @@ public class M1 {
 			}
 			
 		});
+		
+		PacketBuffer packetBuilder = new PacketBuffer(100);
+		packetBuilder.writeString("222");
+		multicast.send(packetBuilder.build());
 	}
 	
 	public static void test2(){
-		ServerDiscovery discovery = new ServerDiscovery(ServerType.AGENT, "127.0.0.1", 1000);
+		ServerDiscovery discovery = new ServerDiscovery("WORLD", "127.0.0.1", 1001);
 		discovery.discover(new ServerListener(){
 			@Override
 			public void onServerJoin(RemoteServer remoteServer) {
-				switch (remoteServer.getServerType()) {
-				case WORLD:
-					System.out.println("receive shake from " + remoteServer.getServerIp() + ":" + remoteServer.getServerPort());
+				String remoteServerId = remoteServer.getServerId();
+				if(remoteServerId.equals("AGENT")){
+					System.out.println("connect to " + remoteServer.getServerIp() + ":" + remoteServer.getServerPort());
+				}else if(remoteServerId.equals("GAME")){
 					remoteServer.shake();
-					break;
-				case GAME:
-					remoteServer.shake();
-					break;
-				default :
-					break;
 				}
 			}
 		});
 		discovery.shake();
 	}
-
+	
 }

@@ -1,15 +1,15 @@
-package tmp.net.socket.udp;
+package com.yuan.common.udp;
 
 public class RemoteServer {
 
-	private ServerType serverType;
+	private String serverId;
 	private String serverIp;
 	private int serverPort;
 	private ServerDiscovery serverDiscovery;
 	
-	public RemoteServer(ServerType serverType, String serverIp, int serverPort, ServerDiscovery serverDiscovery) {
+	public RemoteServer(String serverId, String serverIp, int serverPort, ServerDiscovery serverDiscovery) {
 		super();
-		this.serverType = serverType;
+		this.serverId = serverId;
 		this.serverIp = serverIp;
 		this.serverPort = serverPort;
 		this.serverDiscovery = serverDiscovery;
@@ -19,8 +19,8 @@ public class RemoteServer {
 		serverDiscovery.shake();
 	}
 
-	public ServerType getServerType() {
-		return serverType;
+	public String getServerId() {
+		return serverId;
 	}
 
 	public String getServerIp() {

@@ -1,4 +1,4 @@
-package tmp.net.socket.udp;
+package com.yuan.common.udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -8,12 +8,12 @@ public class ServerDiscovery {
 	private static final int SIZE = 50;
 	private Multicast multicast;
 
-	private ServerType localServerType;
+	private String serverId;
 	private String localServerIp;
 	private int localServerPort;
 
-	public ServerDiscovery(ServerType localServerType, String localServerIp, int localServerPort) {
-		this.localServerType = localServerType;
+	public ServerDiscovery(String serverId, String localServerIp, int localServerPort) {
+		this.serverId = serverId;
 		this.localServerIp = localServerIp;
 		this.localServerPort = localServerPort;
 
@@ -31,7 +31,7 @@ public class ServerDiscovery {
 	public void shake() {
 		if (multicast != null) {
 			PacketBuffer packetBuffer = new PacketBuffer(100);
-			packetBuffer.writeInt(localServerType.getValue());
+			packetBuffer.writeString(serverId);
 			packetBuffer.writeString(localServerIp);
 			packetBuffer.writeInt(localServerPort);
 			try {
@@ -58,12 +58,12 @@ public class ServerDiscovery {
 			@Override
 			public void onReceive(DatagramPacket datagramPacket) throws Exception {
 				PacketBuffer packetBuffer = new PacketBuffer(datagramPacket.getData());
-				ServerType remoteServerType = ServerType.fromValue(packetBuffer.readInt());
+				String remoteServerId = packetBuffer.readString();
 				String remoteServerIp = packetBuffer.readString();
 				int remoteServerPort = packetBuffer.readInt();
 
 				serverListener
-						.onServerJoin(new RemoteServer(remoteServerType, remoteServerIp, remoteServerPort, owner));
+						.onServerJoin(new RemoteServer(remoteServerId, remoteServerIp, remoteServerPort, owner));
 			}
 
 		});
