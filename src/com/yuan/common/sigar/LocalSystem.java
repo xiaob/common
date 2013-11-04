@@ -12,8 +12,6 @@ import org.hyperic.sigar.SigarException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yuan.common.util.SystemTool;
-
 public class LocalSystem {
 	
 	private static final Logger log = LoggerFactory.getLogger(LocalSystem.class);
@@ -22,11 +20,8 @@ public class LocalSystem {
 	private static OperatingSystem os = null;
 	
 	static{
-		SystemTool.appendBinPath(LocalSystem.class);
-		
 		sigar = new Sigar();
 		os = OperatingSystem.getInstance();
-		
 	}
 	
 	/**
