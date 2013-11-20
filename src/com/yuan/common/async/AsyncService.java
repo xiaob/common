@@ -81,6 +81,7 @@ class DefaultCallable<V> implements Callable<V>{
 		this.methodName = methodName;
 		this.params = params;
 	}
+	@SuppressWarnings("unchecked")
 	public V call()throws Exception{
 		Object oo = ReflectUtil.execMethod(obj, methodName, params);
 		if(oo == null){
