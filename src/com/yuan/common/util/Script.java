@@ -1,10 +1,14 @@
 package com.yuan.common.util;
 
+import java.io.File;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
+
+import com.yuan.common.file.FileUtil;
 
 public class Script {
 	
@@ -49,14 +53,21 @@ public class Script {
 	}
 	
 	public static void main(String args[])throws Exception{
+		File f = new File(new File("").getCanonicalFile(), "resource/my.js");
+		String js = FileUtil.readTextFile(f.getAbsolutePath());
+		
+		Script script = new Script();
+		script.exec(js);
+	}
+	protected static void test1()throws Exception{
 		// Packages是脚本语言里的一个全局变量,专用于访问JDK的package
 		String js = "importPackage(javax.swing);importPackage(java.lang);function doSwing(t){var f=new Packages.javax.swing.JFrame(t);f.setSize(400,300);f.setVisible(true);} ";
-//		String js = "function doSwing(t){return Packages.java.lang.Math.abs(-2323872);}";
+//				String js = "function doSwing(t){return Packages.java.lang.Math.abs(-2323872);}";
 		Script script = new Script();
-//		script.bindObject("a", new Student());
+//				script.bindObject("a", new Student());
 	    js = "function test1(){var 变量1 = 1; var 变量2 = 2; return 变量1 + 变量2}";
 		script.exec(js);
-//		Object o = script.invokeFunction("doSwing", "测试");
+//				Object o = script.invokeFunction("doSwing", "测试");
 		Object o = script.invokeFunction("test1");
 		System.out.println(o);
 	}
