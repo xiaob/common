@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.JobListener;
 import org.quartz.Scheduler;
@@ -15,8 +16,11 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.yuan.common.util.AssertUtil;
 
 public class Task {
 	
@@ -96,61 +100,64 @@ public class Task {
 			jobBuilder.usingJobData(new JobDataMap(jobDataMap));
 		}
 		
-//		JobDetail jobDetail = jobBuilder.build();
+		JobDetail jobDetail = jobBuilder.build();
 		
-//		if(AssertUtil.notEmpty(listenList)){
-//			Matcher<JobKey> matcher = KeyMatcher.keyEquals(jobDetail.getKey());
-//			for(JobListener jobListener : listenList){
-//				try {
-//					scheduler.getListenerManager().addJobListener(jobListener, matcher);
-//				} catch (SchedulerException e) {
-//					logger.error(e.getMessage(), e);
-//				}
-//				
-//			}//for
-//		}//if
-//		
-//		try {
-//			scheduler.scheduleJob(jobDetail, trigger);
-//		} catch (SchedulerException e) {
-//			logger.error(e.getMessage(), e);
-//		}
-//		
-//		return jobDetail.getKey();
-		return null;
+		if(AssertUtil.notEmpty(listenList)){
+			KeyMatcher<JobKey> matcher = KeyMatcher.keyEquals(jobDetail.getKey());
+			for(JobListener jobListener : listenList){
+				try {
+					scheduler.getListenerManager().addJobListener(jobListener, matcher);
+				} catch (SchedulerException e) {
+					logger.error(e.getMessage(), e);
+				}
+				
+			}//for
+		}//if
+		
+		try {
+			scheduler.scheduleJob(jobDetail, trigger);
+		} catch (SchedulerException e) {
+			logger.error(e.getMessage(), e);
+		}
+		
+		return jobDetail.getKey();
 	}//addTask
 	
 	public boolean deleteTask(JobKey jobKey){
-//		if(scheduler != null){
-//			try {
-//				scheduler.deleteJob(jobKey);
-//			} catch (SchedulerException e) {
-//				logger.warn(e.getMessage(), e);
-//				return false;
-//			}
-//		}
+		if(scheduler != null){
+			try {
+				scheduler.deleteJob(jobKey);
+			} catch (SchedulerException e) {
+				logger.warn(e.getMessage(), e);
+				return false;
+			}
+		}
 		
 		return true;
 	}
 	public boolean deleteTask(String jobName){
 		
-		return deleteTask(JobKey.jobKey(generateJobName(jobName), generateJobGroupName()));
+		return deleteTask(getJobKey(jobName));
+	}
+	
+	private JobKey getJobKey(String jobName){
+		return JobKey.jobKey(generateJobName(jobName), generateJobGroupName());
 	}
 	
 	public void clear(){
-//		try {
-//			scheduler.clear();
-//		} catch (SchedulerException e) {
-//			logger.warn(e.getMessage(), e);
-//		}
+		try {
+			scheduler.clear();
+		} catch (SchedulerException e) {
+			logger.warn(e.getMessage(), e);
+		}
 	}
 	
 	public boolean checkExists(String jobName){
-//		try {
-//			return scheduler.checkExists(JobKey.jobKey(generateJobName(jobName), generateJobGroupName()));
-//		} catch (SchedulerException e) {
-//			logger.warn(e.getMessage(), e);
-//		}
+		try {
+			return scheduler.checkExists(getJobKey(jobName));
+		} catch (SchedulerException e) {
+			logger.warn(e.getMessage(), e);
+		}
 		
 		return false;
 	}

@@ -30,9 +30,9 @@ public class Main {
 		System.out.println(count.incrementAndGet());
 	}
 	public static void test3(){
-		TriggerFactory tf = new TriggerFactory("");
-		Task task = new Task("");
-		task.addTask(SimpleQuartzJob.class, tf.makeCronTrigger(new Date(), "0 0/1 * * * ? "), null);
+		TriggerFactory tf = new TriggerFactory("test3");
+		Task task = new Task("test3");
+		task.addTask(SimpleQuartzJob.class, tf.makeCronTrigger(new Date(), "0 * * * * ?"), null);
 		task.start();
 	}
 	
