@@ -22,6 +22,8 @@ public class ArrayUtil {
 		System.out.println(Arrays.toString(c[1]));
 		
 		sqrt(100);
+		System.out.println(hypotenuse(10, 10));
+		System.out.println(H(100));
 	}
 	
 	// 找出数组中的最大元素
@@ -118,13 +120,35 @@ public class ArrayUtil {
 			return Double.NaN;
 		}
 		
+		double err = 1e-15;
 		double xn = n;
-		
-		for(int i=0; i<10; i++){
+		while(Math.abs(xn - n/xn) > err*xn){
 			xn = (xn + n/xn)/2.0;
 			System.out.println(xn);
 		}
 		
 		return xn;
+	}
+	
+	/**
+	 * 计算直角三角形的斜边
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static double hypotenuse(double a, double b){
+		
+		return Math.sqrt(a*a  + b*b);
+	}
+	
+	// 计算调和级数
+	public static double H(int N){
+		double sum = 0.0;
+
+		for(int i=1; i<=N; i++){
+			sum += 1.0/i;
+		}
+		
+		return sum;
 	}
 }
