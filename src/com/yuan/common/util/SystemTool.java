@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -204,5 +210,27 @@ public class SystemTool {
 	
 	public static void printImage(InputStream is)throws PrintException{
 		print(is, DocFlavor.INPUT_STREAM.JPEG);
+	}
+	
+	public static String getLocalIp() throws UnknownHostException, SocketException{
+		String ip = InetAddress.getLocalHost().getHostAddress();
+		if(!ip.equals("127.0.0.1")){
+			return ip;
+		}
+		
+		Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
+		while(e.hasMoreElements()){
+			NetworkInterface networkInterface = e.nextElement();
+			
+			Enumeration<InetAddress> e2 = networkInterface.getInetAddresses();
+			while(e2.hasMoreElements()){
+				InetAddress inetAddress = e2.nextElement();
+				if((inetAddress instanceof Inet4Address) && (!inetAddress.getHostAddress().equals("127.0.0.1"))){
+					return inetAddress.getHostAddress();
+				}
+			}
+		}
+		
+		return null;
 	}
 }
