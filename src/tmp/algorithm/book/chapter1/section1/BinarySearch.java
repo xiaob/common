@@ -21,6 +21,7 @@ public class BinarySearch {
 		int hi = a.length - 1;
 		
 		while(lo <= hi){
+			System.out.println("lo = " + lo + ", hi = " + hi);
 			int mid = lo + hi / 2;
 			if(key > a[mid]){
 				lo = mid + 1;
