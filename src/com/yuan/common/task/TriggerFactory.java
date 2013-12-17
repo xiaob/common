@@ -24,6 +24,7 @@ public class TriggerFactory {
 	private String generateTriggerGroupName(){
 		return GROUP_NAME_PREFIX + "_" + name;
 	}
+	
 	public Trigger makeSimpleTrigger(Date startTime, int repeatInterval, int repeatCount) {
 		TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 		triggerBuilder.withIdentity(generateTriggerName(), generateTriggerGroupName());
@@ -32,6 +33,19 @@ public class TriggerFactory {
 		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule();
 		scheduleBuilder.withIntervalInSeconds(repeatInterval); // 执行间隔
 		scheduleBuilder.withRepeatCount(repeatCount); // 重复次数
+		
+		triggerBuilder.withSchedule(scheduleBuilder);
+		return triggerBuilder.build();
+	}
+	
+	public Trigger makeSimpleTrigger(Date startTime, Date endTime, int repeatInterval) {
+		TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
+		triggerBuilder.withIdentity(generateTriggerName(), generateTriggerGroupName());
+		triggerBuilder.startAt(startTime); // 开始时间
+		triggerBuilder.endAt(endTime); // 结束时间
+		
+		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule();
+		scheduleBuilder.withIntervalInSeconds(repeatInterval); // 执行间隔
 		
 		triggerBuilder.withSchedule(scheduleBuilder);
 		return triggerBuilder.build();

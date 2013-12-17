@@ -15,6 +15,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
@@ -126,6 +127,7 @@ public class Task {
 	public boolean deleteTask(JobKey jobKey){
 		if(scheduler != null){
 			try {
+				pauseJob(jobKey);
 				scheduler.deleteJob(jobKey);
 			} catch (SchedulerException e) {
 				logger.warn(e.getMessage(), e);
@@ -138,6 +140,32 @@ public class Task {
 	public boolean deleteTask(String jobName){
 		
 		return deleteTask(getJobKey(jobName));
+	}
+	
+	// 暂停任务
+	public boolean pauseJob(JobKey jobKey){
+		if(scheduler != null){ 
+			try {
+				scheduler.pauseJob(jobKey);
+			} catch (SchedulerException e) {
+				logger.warn(e.getMessage(), e);
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	// 恢复任务
+	public boolean resumeJob(JobKey jobKey){
+		if(scheduler != null){
+			try {
+				scheduler.resumeJob(jobKey);
+			} catch (SchedulerException e) {
+				logger.warn(e.getMessage(), e);
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private JobKey getJobKey(String jobName){
@@ -161,6 +189,34 @@ public class Task {
 		
 		return false;
 	}
+	
+	// 暂停任务
+    public void pauseTrigger(String triggerName,String group){        
+        try {  
+            scheduler.pauseTrigger(new TriggerKey(triggerName, group));//停止触发器  
+        } catch (SchedulerException e) {  
+            throw new RuntimeException(e);  
+        }  
+    }
+    
+    // 恢复任务
+    public void resumeTrigger(String triggerName,String group){       
+        try {  
+            scheduler.resumeTrigger(new TriggerKey(triggerName, group));//重启触发器  
+        } catch (SchedulerException e) {  
+            throw new RuntimeException(e);  
+        }  
+    }
+    
+    // 移除任务
+    public boolean removeTrigdger(String triggerName,String group){       
+        try {  
+            scheduler.pauseTrigger(new TriggerKey(triggerName, group));//停止触发器  
+            return scheduler.unscheduleJob(new TriggerKey(triggerName, group));//移除触发器  
+        } catch (SchedulerException e) {  
+            throw new RuntimeException(e);  
+        } 
+    }
 	
 }
 
