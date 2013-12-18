@@ -7,20 +7,20 @@ public class Main {
 	
 	
 	public static void main(String[] args)throws Exception {
-		test3();
+		test1();
 		
 	}
 	
 	public static void test1()throws Exception{
 		TriggerFactory tf = new TriggerFactory("");
 		Task task = new Task("");
-		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 1000, 5), null);
+		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 3, 5), null);
 		task.start();
 		
 		Thread.sleep(1000 * 4);
 		
-		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 1000, 5), null);
-		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 1000, 5), null);
+//		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 1000, 5), null);
+//		task.addTask(SimpleQuartzJob.class, tf.makeSimpleTrigger(new Date(), 1000, 5), null);
 	}
 	
 	public static void test2(){

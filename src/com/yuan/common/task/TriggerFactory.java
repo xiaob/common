@@ -46,10 +46,16 @@ public class TriggerFactory {
 		
 		SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule();
 		scheduleBuilder.withIntervalInSeconds(repeatInterval); // 执行间隔
+		long repeatCount = (endTime.getTime() - startTime.getTime())/1000*repeatInterval;
+		if(repeatCount == 0){
+			repeatCount = 1;
+		}
+		scheduleBuilder.withRepeatCount((int)repeatCount); // 重复次数
 		
 		triggerBuilder.withSchedule(scheduleBuilder);
 		return triggerBuilder.build();
 	}
+	
 	
 	/**
 	 * 根据cron表达式创建触发器
