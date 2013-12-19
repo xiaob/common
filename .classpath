@@ -70,7 +70,6 @@
 	<classpathentry kind="lib" path="lib/resolver.jar"/>
 	<classpathentry kind="lib" path="lib/sanselan-0.97-incubator.jar"/>
 	<classpathentry kind="lib" path="lib/serializer.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/sigar.jar"/>
 	<classpathentry kind="lib" path="lib/snmp4j-1.11.jar"/>
 	<classpathentry kind="lib" path="lib/SNMP4J-agent.jar"/>
@@ -127,5 +126,11 @@
 	<classpathentry kind="lib" path="lib/jsch-0.1.50.jar"/>
 	<classpathentry kind="lib" path="lib/quartz-2.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-core.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-jasper.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-logging-juli.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="lib/ecj-4.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
