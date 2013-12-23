@@ -2,13 +2,11 @@ package tmp.disruptor;
 
 import java.util.concurrent.Executors;
 
-import com.lmax.disruptor.ClaimStrategy;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.FatalExceptionHandler;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.Sequence;
 import com.lmax.disruptor.SequenceGroup;
-import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.WorkerPool;
 
 public class Demo1 {
@@ -39,9 +37,6 @@ public class Demo1 {
 		myEventWorkHandlers[1] = workHandler2;
 		
 	    WorkerPool<MyEvent> workerPool = new WorkerPool<MyEvent>(MyEvent.FACTORY,
-	    		1024 * 8,
-                ClaimStrategy.Option.SINGLE_THREADED,
-                WaitStrategy.Option.YIELDING,
                 new FatalExceptionHandler(),
                 myEventWorkHandlers);
 	    RingBuffer<MyEvent> ringBuffer = workerPool.start(Executors.newCachedThreadPool());
@@ -57,7 +52,7 @@ public class Demo1 {
 		gatingSequenceGroup.add(new Sequence(2));
 		gatingSequenceGroup.add(new Sequence(3));
 		gatingSequenceGroup.add(new Sequence(4));
-		ringBuffer.setGatingSequences(new Sequence());
+		ringBuffer.addGatingSequences(new Sequence());
 		
 		publishEvent1(ringBuffer, "0000");
 //		publishEvent1(ringBuffer, "1111");
@@ -88,6 +83,16 @@ public class Demo1 {
 		disruptor.addWorkHandler(new MessageEventWorkHandler() {
 			public void onEvent(MessageEvent event) throws Exception {
 				show(event.getMessage().toString());
+			}
+		});
+		disruptor.addWorkHandler(new MessageEventWorkHandler() {
+			public void onEvent(MessageEvent event) throws Exception {
+				show("==" + event.getMessage().toString());
+			}
+		});
+		disruptor.addWorkHandler(new MessageEventWorkHandler() {
+			public void onEvent(MessageEvent event) throws Exception {
+				show("**" + event.getMessage().toString());
 			}
 		});
 		disruptor.start();
