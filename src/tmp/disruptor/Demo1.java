@@ -84,16 +84,16 @@ public class Demo1 {
 				show(event.getMessage().toString());
 			}
 		});
-		disruptor.addWorkHandler(new MessageEventWorkHandler() {
-			public void onEvent(MessageEvent event) throws Exception {
-				show("==" + event.getMessage().toString());
-			}
-		});
-		disruptor.addWorkHandler(new MessageEventWorkHandler() {
-			public void onEvent(MessageEvent event) throws Exception {
-				show("**" + event.getMessage().toString());
-			}
-		});
+//		disruptor.addWorkHandler(new MessageEventWorkHandler() {
+//			public void onEvent(MessageEvent event) throws Exception {
+//				show("==" + event.getMessage().toString());
+//			}
+//		});
+//		disruptor.addWorkHandler(new MessageEventWorkHandler() {
+//			public void onEvent(MessageEvent event) throws Exception {
+//				show("**" + event.getMessage().toString());
+//			}
+//		});
 		disruptor.start();
 		
 		disruptor.publishEvent("111");
