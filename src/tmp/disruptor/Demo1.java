@@ -2,7 +2,6 @@ package tmp.disruptor;
 
 import java.util.concurrent.Executors;
 
-import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.FatalExceptionHandler;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.Sequence;
@@ -16,12 +15,12 @@ public class Demo1 {
 	}
 	
 	public static void test1(){
-		EventHandler<MyEvent> handler1 = new EventHandler<MyEvent>() {
-			public void onEvent(MyEvent event, long sequence, boolean endOfBatch)
-					throws Exception {
-				show("MyEvent=" + event.getEventName() + ", sequence=" + sequence + ", endOfBatch=" + endOfBatch);
-			}
-		};
+//		EventHandler<MyEvent> handler1 = new EventHandler<MyEvent>() {
+//			public void onEvent(MyEvent event, long sequence, boolean endOfBatch)
+//					throws Exception {
+//				show("MyEvent=" + event.getEventName() + ", sequence=" + sequence + ", endOfBatch=" + endOfBatch);
+//			}
+//		};
 		MyEventWorkHandler workHandler1 = new MyEventWorkHandler(){
 			public void onEvent(MyEvent event) throws Exception {
 				show("event1 = " + event.getEventName());
@@ -101,6 +100,8 @@ public class Demo1 {
 		disruptor.publishEvent("222");
 		disruptor.publishEvent("3");
 		disruptor.publishEvent("4");
+		
+		disruptor.shutdown();
 	}
 
 }
