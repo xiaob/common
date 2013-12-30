@@ -10,7 +10,7 @@ public class Search {
 		Arrays.sort(a);
 		
 		long start = System.currentTimeMillis();
-		System.out.println(binarySearch(a, a[2]));
+		System.out.println(binarySearch(a, a[13]));
 		long end = System.currentTimeMillis();
 		
 		System.out.println("耗时：" + (end - start) + "ms, ");
@@ -32,22 +32,24 @@ public class Search {
 
 	// 折半查找
 	public static int binarySearch(int[] a, int key){
-		return binarySearch(a, key, 0, a.length - 1);
-	}
-	private static int binarySearch(int[] a, int key, int low, int high){
-		if(low > high){
-			return -1;
+		int low = 0;
+		int high = a.length - 1;
+		
+		while(low <= high){
+			int middle = (low + high) / 2;
+			System.out.println("low=" + low + ", high=" + high + ", middle=" + middle);
+			if(key > a[middle]){
+				low = middle + 1;
+				continue;
+			}else if(key < a[middle]){
+				high = middle - 1;
+				continue;
+			}else{
+				return middle;
+			}
 		}
 		
-		int middle = (low + high) / 2;
-		
-		if(a[middle] > key){
-			return binarySearch(a, key, low, middle - 1);
-		}else if(a[middle] < key){
-			return binarySearch(a, key, middle + 1, high);
-		}else{
-			return middle;
-		}
+		return -1;
 	}
 	
 	public static long hash(String str){

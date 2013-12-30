@@ -45,7 +45,7 @@ public class TestCollection {
 		System.out.println(list);
 		System.out.println("=========");
 		
-		Iterator it = list.iterator();
+		Iterator<?> it = list.iterator();
 		while(it.hasNext()){
 			it.next();
 			it.remove();
