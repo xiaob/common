@@ -143,7 +143,7 @@ public class GraphDemo {
 		AffineTransform tr = new AffineTransform();
 		tr.translate(400, 300); // 进行平移变换, 
 		tr.scale(20, 40); //缩放
-		Shape shape = tr.createTransformedShape(myShape2());
+		Shape shape = tr.createTransformedShape(myShape3());
 		
 		g2.setColor(Color.BLUE);
 		g2.drawLine(400, 0, 400, 600);
@@ -220,6 +220,26 @@ public class GraphDemo {
 		return path;
 	}
 	
+	public static Shape myShape3(){
+		GeneralPath path = new GeneralPath();
+		
+		double y;
+		double nPoints = 1;
+		for(double x=0; x<=nPoints; x += 0.1){
+			y = Math.sqrt(1-x*x);
+			System.out.println(x + ", " + y);
+			if(x == 0){
+				path.moveTo(x, y);
+			}else{
+				path.lineTo(x, y);
+			}
+			
+		}
+		
+//		path.closePath();
+		return path;
+	}
+	
 	public static BufferedImage drawRect(){
 		BufferedImage bufferedImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D)bufferedImage.getGraphics();
@@ -284,9 +304,9 @@ public class GraphDemo {
 //		bi = drawDemo1();
 //		bi = drawPicture();
 //		bi = drawHello2D();
-		bi = drawSpirograph();
+//		bi = drawSpirograph();
 //		bi = drawLine();
-//		bi = drawShape();
+		bi = drawShape();
 //		bi = drawRect();
 //		bi = drawRect2();
 //		bi = drawQuad();
