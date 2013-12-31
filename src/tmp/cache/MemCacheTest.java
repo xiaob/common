@@ -6,14 +6,15 @@ import com.danga.MemCached.SockIOPool;
 public class MemCacheTest {
 
 	public static void main(String[] args) {
-		test2();
+		test1();
 	}
 	
 	public static void test1(){
-		MemCachedClient cachedClient = getCached("192.168.100.103:11211");
+		MemCachedClient cachedClient = getCached("192.168.56.101:11211");
 		
 		cachedClient.add("name", "zhang");
-		cachedClient.add("age", 22);
+		cachedClient.set("age", 22);
+		System.out.println(cachedClient.get("name"));
 		System.out.println(cachedClient.get("age"));
 	}
 	

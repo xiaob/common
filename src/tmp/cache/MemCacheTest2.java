@@ -16,9 +16,10 @@ import net.rubyeye.xmemcached.utils.AddrUtil;
 public class MemCacheTest2 {
 
 	public static void main(String[] args) throws IOException, MemcachedException, InterruptedException, TimeoutException {
-		MemcachedClient memcachedClient = getCache("192.168.5.205:11211");
-		Object obj = memcachedClient.get("4151888", new SerializingTranscoder());
-		System.out.println("==========" + obj.getClass().getName());
+		MemcachedClient memcachedClient = getCache("192.168.56.101:11211");
+		memcachedClient.add("name", 20000, "zhang");
+		Object obj = memcachedClient.get("name", new SerializingTranscoder());
+		System.out.println("==========" + obj);
 //		obj.setRole(3);
 //		memcachedClient.set("4151888", 0, obj);
 //		Map<InetSocketAddress, Map<String, String>> map = memcachedClient.getStats();
