@@ -5,31 +5,3 @@ http://wenku.baidu.com/view/9494d24be45c3b3567ec8bf9.html%E7%AE%97%E6%98%AF%E7%9
 	
 	
 编译原理 antlr
-tomcat集群 研究 http://zengzhaoshuai.iteye.com/blog/1172900
-	any net 228.0.0.4 netmask 255.255.255.255 dev eth0
-mysql主从复制研究 http://blog.csdn.net/stuartjing/article/details/9719701
-		http://jingyan.baidu.com/article/0eb457e57356e803f1a90512.html
-	配置主数据库
-		1>创建用户并授权
-			grant replication slave on *.* to rep1@192.168.56.129 identified by 'mysql';
-			flush privileges;
-		2>查询主数据库的状态 记下File以及Position的值，在后面进行从服务器操作的时候需要使用
-			 show master status;
-	配置从数据库
-		1>同步
-			change master to master_host='192.168.56.128',master_user='rep1',master_password='mysql',master_log_file='mysql-bin.000004',master_log_pos=477; 
-		2>启动slave
-			 start slave;
-		3>主从同步检查, Slave_IO进程以及slave_SQL进程都必须正常运行
-			show slave status;
-	如果主数据库服务器已经存在用户数据，那么在进行主从复制时，需要做以下处理:
-		1>主数据库锁表操作，不让数据再进行写入动作
-			flush tables withread lock;
-		2>查看主数据库的状态, 记下File以及Position的值，以备从服务器使用
-			show master status;
-		3>把主服务器的数据文件复制到从服务器，最好先用tar归档压缩处理一下
-		4>取消主数据库锁定
-			unlock tables;
-	测试，在主服务器上的操作：
-		create table first_db(idint(3)),name char (10)); 
-		insert into first_tb values (001,'myself'); 
