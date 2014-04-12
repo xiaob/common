@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Demo1 {
 
@@ -16,7 +17,8 @@ public class Demo1 {
 //		testNumber();
 //		testSwitch();
 //		testTry();
-		testFile();
+//		testFile();
+		testObjects();
 	}
 
 	// 二进制字面量
@@ -95,6 +97,13 @@ public class Demo1 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void testObjects(){
+		String name = "111";
+		System.out.println(name.hashCode());
+		System.out.println(Objects.hash(name));
+		System.out.println(Objects.requireNonNull(null, "qqq"));
 	}
 	
 }
