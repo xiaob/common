@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -52,10 +54,22 @@ public class Jaxb {
 		try {
 			obj = parse(clazz, new InputStreamReader(is, encoding));
 			is.close();
+			execInit(clazz, obj);
 		} catch (Exception e) {
 			throw new XmlException(e.getMessage(), e);
 		}
 		return obj;
+	}
+	private static void execInit(Class<?> clazz, Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Method[] methods = clazz.getMethods();
+		if(methods != null){
+			for(Method method : methods){
+				if(method.getAnnotation(XmlInit.class) != null){
+					method.invoke(obj);
+					return ;
+				}
+			}
+		}
 	}
 	public static <T extends Object> T parse(Class<T> clazz, Reader reader)throws XmlException{
 		T obj = null;

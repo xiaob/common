@@ -34,17 +34,26 @@ public class TestXml {
 
 }
 
-@XmlRootElement
+@XmlRootElement(name="user")
 class User{
+	@XmlAttribute(name="sex")
 	private String sex="man";
 	
+	@XmlAttribute
 	private int age=20;
 	
+	@XmlElement(name="birthday")
 	private String birthday="wang";
 	
+	@XmlElementWrapper(name="addresses")
+	@XmlElement(name="address")
 	private List<String> addresses = new ArrayList<String>();
+	
+	@XmlElementWrapper(name="stus")
+	@XmlElement(name="stu") 
 	private List<Stu> stus = new ArrayList<Stu>();
 	
+	@XmlJavaTypeAdapter(DateAdapter.class)
 	private Date date = new Date();
 
 	public User() {
@@ -62,62 +71,65 @@ class User{
 		this.birthday = birthday;
 	}
 	
-	@XmlAttribute
+	@XmlInit
+	public void init(){
+		System.out.println("init ...");
+	}
+	
 	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+//	public void setSex(String sex) {
+//		this.sex = sex;
+//	}
 
-	@XmlAttribute
 	public int getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+//	public void setAge(int age) {
+//		this.age = age;
+//	}
 
 	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
+//	public void setBirthday(String birthday) {
+//		this.birthday = birthday;
+//	}
 
 //	@XmlList
 	public List<String> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<String> addresses) {
-		this.addresses = addresses;
-	}
+//	public void setAddresses(List<String> addresses) {
+//		this.addresses = addresses;
+//	}
 
-	@XmlJavaTypeAdapter(DateAdapter.class)
 	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+//	public void setDate(Date date) {
+//		this.date = date;
+//	}
 	
-	@XmlElementWrapper(name="stus")
-	@XmlElement(name="stu") 
 	public List<Stu> getStus() {
 		return stus;
 	}
 
-	public void setStus(List<Stu> stus) {
-		this.stus = stus;
-	}
+//	public void setStus(List<Stu> stus) {
+//		this.stus = stus;
+//	}
 
 	public static class Stu{
+		@XmlElement(name="id")
 		private int id;
+		
+		@XmlElement(name="name")
 		private String name;
 		
 		public Stu(int id, String name) {
@@ -133,14 +145,9 @@ class User{
 		public int getId() {
 			return id;
 		}
-		public void setId(int id) {
-			this.id = id;
-		}
+		
 		public String getName() {
 			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
 		}
 		
 	}
