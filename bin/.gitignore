@@ -13,11 +13,10 @@
 /proxy-gen.xml
 /proxyTemplate
 /quartz.properties
+/redis.properties
 /test.accdb
 /test.laccdb
 /test2.mdb
 /text.txt
 /thanks.au
 /tmp
-/url-default.xml
-/user.json
