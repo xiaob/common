@@ -134,5 +134,6 @@
 	<classpathentry kind="lib" path="lib/jedis-2.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-pool2-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/concurrentlinkedhashmap-lru-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-2.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
