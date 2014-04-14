@@ -1,10 +1,10 @@
 package tmp.jdk.jdk7;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,10 +82,10 @@ public class Demo1 {
 			if(Files.notExists(path.getParent())){
 				Files.createDirectories(path.getParent());
 			}
-			Files.write(path, list);
+			Files.write(path, list, StandardCharsets.UTF_8);
 			
 //			System.out.println(Files.readAllBytes(Paths.get("")));
-			System.out.println(Files.readAllLines(Paths.get("d:/tmp/a.txt")));
+			System.out.println(Files.readAllLines(Paths.get("d:/tmp/a.txt"), StandardCharsets.UTF_8));
 //			Files.write(Paths.get(""), bytes, StandardOpenOption.CREATE);
 			
 			Path otherPath = path.getRoot().resolve("download");
