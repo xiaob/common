@@ -1,9 +1,12 @@
-package com.yuan.common.collection;
+package tmp.cache.lrucache;
+
+import tmp.cache.ICache;
+import tmp.cache.StorageKey;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import com.googlecode.concurrentlinkedhashmap.Weighers;
 
-public class LRUCache {
+public class LRUCache implements ICache{
 
 	private ConcurrentLinkedHashMap<String, Object> map;
 	
@@ -12,12 +15,14 @@ public class LRUCache {
 				.weigher(Weighers.singleton()).build();
 	}
 	
-	public void set(String key, Object value){
-		map.put(key, value);
+	@Override
+	public void set(StorageKey key, long cacheSuffix, Object value) {
+		map.put(key.getName() + "_" + cacheSuffix, value);
 	}
-	
-	public <T> T get(String key, Class<T> clazz){
-		Object value = map.get(key);
+
+	@Override
+	public <T> T get(StorageKey key, long cacheSuffix, Class<T> clazz) {
+		Object value = map.get(key.getName() + "_" + cacheSuffix);
 		
 		if(value == null){
 			return null;

@@ -7,11 +7,6 @@
     <transactionManagerLookup class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup"
                               properties="jndiName=java:/TransactionManager" propertySeparator=";"/>
 
-    <!--
-    Sample cache named sampleCache3. This cache overflows to disk. The disk store is
-    persistent between cache and VM restarts. The disk expiry thread interval is set to 10
-    minutes, overriding the default of 2 minutes.
-    -->
     <cache name="mainCache"
            maxElementsInMemory="100000"
            eternal="false"
