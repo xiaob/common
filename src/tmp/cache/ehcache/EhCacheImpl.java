@@ -3,24 +3,28 @@ package tmp.cache.ehcache;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
+import tmp.cache.ICache;
+import tmp.cache.StorageKey;
 
-public class EhCacheTest {
+public class EhCacheImpl implements ICache {
 
-	public static final int DAY = 24*60*60;
 	private CacheManager cacheManager;
 	private Cache cache;
 	
-	public EhCacheTest(){
+	public EhCacheImpl(){
 		cacheManager = CacheManager.newInstance("resource/ehcache.xml");
 		cache = cacheManager.getCache("mainCache");
 	}
 	
-	public void set(Object key, Object value, int expire){
-		cache.put(new Element(key, value, expire, expire));
+	@Override
+	public void set(StorageKey key, long cacheSuffix, Object value) {
+		
+		cache.put(new Element(key.getName() + "_" + cacheSuffix, value, key.getExpire(), key.getExpire()));
 	}
-	
-	public <T> T get(Object key, Class<T> clazz){
-		Element element = cache.get(key);
+
+	@Override
+	public <T> T get(StorageKey key, long cacheSuffix, Class<T> clazz) {
+		Element element = cache.get(key.getName() + "_" + cacheSuffix);
 		if(element == null){
 			return null;
 		}
@@ -35,16 +39,6 @@ public class EhCacheTest {
 		if(cacheManager != null){
 			cacheManager.shutdown();
 		}
-	}
-	
-	public static void main(String[] args) {
-		EhCacheTest ehCacheTest = new EhCacheTest();
-		
-		ehCacheTest.set("test1", "value1", 2*DAY);
-		
-		System.out.println(ehCacheTest.get("test1", String.class));
-		
-		ehCacheTest.shutdown();
 	}
 
 }

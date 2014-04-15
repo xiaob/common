@@ -1,10 +1,11 @@
 package com.yuan.common.collection;
 
 
+
 public class TestCollection {
 
 	public static void main(String[] args) {
-		testConcurrentMap();
+		testMap();
 	}
 	
 	public static void testMap(){
@@ -19,14 +20,4 @@ public class TestCollection {
 		System.out.println(map.get(2, 1));
 	}
 	
-	public static void testConcurrentMap() {
-		LRUCache cache = new LRUCache(2);
-		
-		cache.set("1", 1);  
-		cache.set("2", 2);  
-		cache.set("3", 3);  
-		System.out.println(cache.get("1", Integer.class));//null 已经失效了  
-		System.out.println(cache.get("2", Integer.class)); 
-	}
-
 }
