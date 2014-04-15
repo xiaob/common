@@ -2,9 +2,9 @@ package com.yuan.common.file;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -20,12 +20,12 @@ public class TextDataParser implements Iterator<List<String>> {
 	}
 	
 	public TextDataParser(File dataFile, String seperator){
-		 try {
-			br = new BufferedReader(new FileReader(dataFile));
-		  } catch (FileNotFoundException e) {
-			 e.printStackTrace();
-		  }	
-		 this.seperator = seperator;
+		try {
+			br = Files.newBufferedReader(dataFile.toPath(), StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.seperator = seperator;
 	}
 	
 	@Override

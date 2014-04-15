@@ -1,18 +1,22 @@
 package tmp.others;
 
-import java.math.BigDecimal;
+import java.util.Calendar;
 
 
 public class Demo3 {
 
 	public static void main(String[] args) throws Exception {
-		double a = 0.1 + 0.1 + 0.1;
-
-		System.out.println(a);
+		Calendar c = Calendar.getInstance();
+		c.set(2014, 0, 1);
 		
-		BigDecimal b = new BigDecimal("0.1").add(new BigDecimal("0.1")).add(new BigDecimal("0.1"));
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
 		
-		System.out.println(b);
+		c.set(Calendar.MILLISECOND, 0);
+		
+		System.out.println(c.getTimeInMillis());
+		System.out.println(c.getTime().toLocaleString());
 	}
 
 }

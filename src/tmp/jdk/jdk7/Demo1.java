@@ -2,6 +2,7 @@ package tmp.jdk.jdk7;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class Demo1 {
 
@@ -18,7 +21,9 @@ public class Demo1 {
 //		testSwitch();
 //		testTry();
 //		testFile();
-		testObjects();
+//		testObjects();
+		
+		System.out.println(new String("agent.xml").equals(new String("agent.xml")));
 	}
 
 	// 二进制字面量
@@ -76,6 +81,7 @@ public class Demo1 {
 	// 文件操作
 	public static void testFile(){
 		try {
+			System.out.println(FileSystems.getDefault().getPath("tmp/aaa").toAbsolutePath());
 			List<String> list = new ArrayList<String>();
 			list.add("111");
 			Path path = Paths.get("d:/tmp/a.txt");
@@ -94,6 +100,8 @@ public class Demo1 {
 			System.out.println(otherPath.toAbsolutePath());
 			System.out.println(otherPath.toRealPath());
 			
+			Path p = FileSystems.getDefault().getPath("", "tmp/aaa");
+			System.out.println("===" + p.toAbsolutePath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
