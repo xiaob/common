@@ -85,6 +85,7 @@ public class MysqlTool {
 			
 			List<String> commandList = new ArrayList<String>();
 			commandList.add("mysqldump");
+			commandList.add("--single-transcation");
 			commandList.add("--default-character-set=utf8");
 			commandList.add("-h" + host);
 			commandList.add("-P" + port);
