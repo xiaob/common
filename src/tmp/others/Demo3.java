@@ -6,6 +6,10 @@ import java.util.Calendar;
 public class Demo3 {
 
 	public static void main(String[] args) throws Exception {
+		
+	}
+	
+	public static void test1(){
 		Calendar c = Calendar.getInstance();
 		c.set(2014, 0, 1);
 		
