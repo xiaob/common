@@ -1,5 +1,6 @@
 package com.yuan.common.util;
 
+import java.nio.file.Paths;
 import java.text.BreakIterator;
 import java.util.Iterator;
 
@@ -49,8 +50,8 @@ public class TextIterator implements Iterator<String> {
 		throw new UnsupportedOperationException("本迭代器是只读的."); 
 	}
 	
-	public static void main(String args[]){
-		TextIterator iterator = TextIterator.getSentenceInstance(FileUtil.readTextFile2("d:/address.txt", "GBK"));
+	public static void main(String args[])throws Exception{
+		TextIterator iterator = TextIterator.getSentenceInstance(FileUtil.readText(Paths.get("d:/address.txt", "GBK")));
 		while(iterator.hasNext()){
 			System.out.println(iterator.next());
 		}

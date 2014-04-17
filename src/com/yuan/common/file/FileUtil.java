@@ -3,23 +3,22 @@ package com.yuan.common.file;
 import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.JarURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -36,14 +35,8 @@ public class FileUtil {
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 	
 	public static void main(String[] args) throws Exception{
-//		move("e:/tmp2/aa", "e:/tmp2/bb/aa");
-//		System.out.println(new String(FileUtil.getAppDir().getBytes("UTF-8"),"GBK"));
-//		System.out.println(endsWithFileSeparator("d:/test" + File.separator));
-		Iterator<File> it = iterator("e:/test");
-		while(it.hasNext()){
-			File f = it.next();
-			System.out.println(f.isDirectory() + ", " + f.getAbsolutePath());
-		}
+		Files.delete(Paths.get("d:/data"));
+		
 	}
 	public static void writeToFile(String content, String fullPath)throws IOException{
 		writeToFile(content,fullPath,false,"UTF-8");
@@ -211,111 +204,22 @@ public class FileUtil {
 		f.delete();
 	}
 	
-	public static String readTextFile(String fullPath){
-		return readTextFile(fullPath, "UTF-8");
-	}
-	
-	public static String readTextFile2(String fullPath){
-		return readTextFile2(fullPath, "UTF-8");
-	}
-	
-	/**
-	 * 获得文本文件的内容,一行一行读
-	 * @param fullPath String
-	 * @return String
-	 */
-	public static String readTextFile(String fullPath, String encoding){
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(fullPath));
-			String line = null;
-			while((line = br.readLine()) != null){
-				pw.println(line);
-			}
-		} catch (Exception e) {
-			logger.warn(e.getMessage(), e);
-		}finally{
-			if(br != null){
-				try {
-					br.close();
-				} catch (IOException e) {
-					logger.warn(e.getMessage(), e);
-				}
-			}
-			pw.close();
+	public static String readText(Path path) throws IOException{
+		List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(String line : lines){
+			sb.append(line);
 		}
 		
-		return sw.toString();
-	}
-	
-	/**
-	 * 读取文本文件的内容, 定制字符串缓冲区,效率高
-	 * @param fullPath String
-	 * @param encoding String
-	 * @return String
-	 */
-	public static String readTextFile2(String fullPath, String encoding) {
-		char[] buffer = new char[4096];
-		int len = 0;
-		StringBuffer content = new StringBuffer(4096);
-
-		InputStreamReader fr = null;
-		BufferedReader br = null;
-		try {
-			fr = new InputStreamReader(new FileInputStream(fullPath), encoding);
-			br = new BufferedReader(fr);
-			while ((len = br.read(buffer)) > -1) {
-				content.append(buffer, 0, len);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			if (fr != null)
-				try {
-					fr.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-		return content.toString();
-	}
-	
-	/**
-	 * 读取1MB以内的二进制文件
-	 * @param binaryFile String
-	 * @return byte[]
-	 */
-	public static byte[] readBinaryFile(String binaryFile)throws IOException{
-		return readBinaryFile(new File(binaryFile));
-	}
-	public static byte[] readBinaryFile(File f)throws IOException{
-		byte[] fBytes = new byte[(int)f.length()];
-		FileInputStream fis = new FileInputStream(f);
-		fis.read(fBytes);
-		fis.close();
-		return fBytes;
+		return sb.toString();
 	}
 	
 	public static byte[] readFile(URL url) throws IOException, URISyntaxException{
 		String protocol = url.getProtocol();
 		if(protocol.equals("file")){
-			InputStream is = null;
-			try{
-				is = new FileInputStream(new File(url.toURI()));
-				return Tools.readStream(is);
-			}finally{
-				if(is != null){
-					is.close();
-				}
-			}
+			return Files.readAllBytes(Paths.get(url.toURI()));
 		}else if(protocol.equals("jar")){
 			JarURLConnection conn = null;
 			InputStream is = null;
@@ -323,6 +227,7 @@ public class FileUtil {
 				conn = (JarURLConnection)url.openConnection();
 				conn.setDoInput(true);
 				is = conn.getInputStream();
+				
 				return Tools.readStream(is);
 			}finally{
 				if(is != null){
@@ -447,21 +352,6 @@ public class FileUtil {
 		return filePath;
 	}
 	
-	/**
-	 * 迭代目录及子目录中的文件, 不包括目录
-	 * @param dir String
-	 * @param exts String[]
-	 * @return Iterator<File>
-	 */
-	public static Iterator<File> iterator(String dir, String... exts){
-		
-		return iterator(new File(dir), exts);
-	}
-	public static Iterator<File> iterator(File dir, String... exts){
-		Iterator<File> it = new FileIterator(dir, exts);
-		
-		return it;
-	}
 	/**
 	 * 列出子文件夹
 	 * @param parentDir File

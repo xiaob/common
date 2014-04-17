@@ -5,6 +5,7 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -79,7 +80,11 @@ class DropArea extends JTextArea {
 		new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, new DropAdapter(){
 			public void drop(List<File> fileList, DropTargetDropEvent event){
 				for(File f : fileList){
-					resetText(FileUtil.readTextFile(f.getAbsolutePath(), "UTF-8"));
+					try {
+						resetText(FileUtil.readText(f.toPath()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yuan.common.collection.ListEnumeration;
-import com.yuan.common.file.FileUtil;
 
 
 public class ClassesClassLoader extends AbstractClassLoader {
@@ -45,7 +45,7 @@ public class ClassesClassLoader extends AbstractClassLoader {
         File classFile = searchFile(child);
         if(classFile != null){
         	try {
-				return FileUtil.readBinaryFile(classFile);
+				return Files.readAllBytes(classFile.toPath());
 			} catch (IOException e) {
 				logger.warn(e.getMessage(), e);
 				throw new ClassNotFoundException(e.getMessage(), e);

@@ -2,11 +2,12 @@ package com.yuan.common.algorithm;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Set;
 
-import com.yuan.common.file.FileUtil;
-
 import multi.patt.match.ac.AcApply;
+
+import com.yuan.common.file.FileUtil;
 
 public class DirtTest {
 
@@ -32,9 +33,9 @@ public class DirtTest {
 		
 		DirtWordFilter dirtWordService = new DirtWordFilter(getResource("resource/key.txt"));
 		dirtWordService.init();
-		System.out.println(dirtWordService.containsDirtWord(FileUtil.readTextFile(getResource("resource/text.txt"))));
+		System.out.println(dirtWordService.containsDirtWord(FileUtil.readText(Paths.get(getResource("resource/text.txt")))));
 		System.out.println(dirtWordService.containsDirtWord("11111111111111胡锦涛111111"));
-		System.out.println(dirtWordService.doFilter(FileUtil.readTextFile(getResource("resource/text.txt"))));
+		System.out.println(dirtWordService.doFilter(FileUtil.readText(Paths.get(getResource("resource/text.txt")))));
 		
 		
 		DirtWordFilter dirtWordService2 = new DirtWordFilter(getResource("resource/Harmony.txt"));

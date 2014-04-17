@@ -54,7 +54,7 @@ public class Script {
 	
 	public static void main(String args[])throws Exception{
 		File f = new File(new File("").getCanonicalFile(), "resource/my.js");
-		String js = FileUtil.readTextFile(f.getAbsolutePath());
+		String js = FileUtil.readText(f.toPath());
 		
 		Script script = new Script();
 		script.exec(js);

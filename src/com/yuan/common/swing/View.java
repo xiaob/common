@@ -161,7 +161,11 @@ public class View extends AppFrame {
 		}
 		
 		final ContentWindow cw = new ContentWindow(f.getAbsolutePath());
-		cw.setText(FileUtil.readTextFile(f.getAbsolutePath(), encoding));
+		try {
+			cw.setText(FileUtil.readText(f.toPath()));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		cw.addInternalFrameListener(new InternalFrameAdapter(){
 			public void internalFrameClosed(InternalFrameEvent e){
 //				cw.dispose();
