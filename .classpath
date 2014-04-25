@@ -56,7 +56,6 @@
 	<classpathentry kind="lib" path="lib/minlog-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/mongo-2.7.3.jar"/>
 	<classpathentry kind="lib" path="lib/mp3spi1.9.4.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12-bin.jar"/>
 	<classpathentry kind="lib" path="lib/neethi-2.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc14-9.2.0.1.0.jar"/>
@@ -135,5 +134,6 @@
 	<classpathentry kind="lib" path="lib/commons-pool2-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/concurrentlinkedhashmap-lru-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/ehcache-2.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.30-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
