@@ -13,15 +13,19 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 public class DbUtilsTest {
 
 	public static void main(String[] args) throws SQLException {
-		String sql = "select a from nums limit 1";
-		int money = queryScalar(sql, Integer.class);
-		System.out.println(money);
+		String sql = "select dept_no as deptNo, dept_name as deptName from departments limit 10";
+//		int money = queryScalar(sql, Integer.class);
+//		System.out.println(money);
+		List<Dept> list = queryList(sql, Dept.class);
+		for(Dept dept : list){
+			System.out.println(dept);
+		}
 	}
 	
 	private static MysqlDataSource dataSource;
 	static{
 		dataSource = new MysqlDataSource();
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8");
+		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/employees?useUnicode=true&characterEncoding=utf-8");
 		dataSource.setUser("root");
 		dataSource.setPassword("");
 	}
