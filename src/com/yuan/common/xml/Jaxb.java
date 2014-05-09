@@ -20,43 +20,49 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+/**
+ * XML与Java对象绑定
+ * @author <a href="mailto:cihang.yuan@happyelements.com">cihang.yuan</a>
+ * @version 1.0 2014年4月14日
+ * @since 1.0
+ */
 public class Jaxb {
 	
-	public static <T extends Object> T parseFromString(Class<T> clazz, String xmlStr)throws XmlException{
+	public static <T extends Object> T parseFromString(Class<T> clazz, String xmlStr){
 		return parse(clazz, new StringReader(xmlStr));
 	}
-	public static <T extends Object> T parse(Class<T> clazz, final String xmlFile)throws XmlException{
+	public static <T extends Object> T parse(Class<T> clazz, final String xmlFile){
 		return parse(clazz, xmlFile, false);
 	}
 	
-	public static <T extends Object> T parse(Class<T> clazz, final String xmlFile, final boolean isValidate)throws XmlException{
+	public static <T extends Object> T parse(Class<T> clazz, final String xmlFile, final boolean isValidate){
 		File f = new File(xmlFile);
 		if(!f.exists()){
 			return null;
 		}
 		if(isValidate && !validator(f)){
-			throw new XmlException("文件"+xmlFile+"验证失败");
+			throw new RuntimeException("file "+xmlFile+" valid failed");
 		}
 		T obj = null;
 		try {
 			obj = parse(clazz, new FileReader(f));
 		} catch (Exception e) {
-			throw new XmlException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 		return obj;
 	}
 	
-	public static <T extends Object> T parse(Class<T> clazz, InputStream is)throws XmlException{
+	public static <T extends Object> T parse(Class<T> clazz, InputStream is){
 		return parse(clazz, is, "UTF-8");
 	}
-	public static <T extends Object> T parse(Class<T> clazz, InputStream is, final String encoding)throws XmlException{
+	public static <T extends Object> T parse(Class<T> clazz, InputStream is, final String encoding){
 		T obj = null;
 		try {
 			obj = parse(clazz, new InputStreamReader(is, encoding));
 			is.close();
 			execInit(clazz, obj);
 		} catch (Exception e) {
-			throw new XmlException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 		return obj;
 	}
@@ -71,15 +77,16 @@ public class Jaxb {
 			}
 		}
 	}
-	public static <T extends Object> T parse(Class<T> clazz, Reader reader)throws XmlException{
+	public static <T extends Object> T parse(Class<T> clazz, Reader reader){
 		T obj = null;
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Unmarshaller um = context.createUnmarshaller();
 			obj = clazz.cast(um.unmarshal(reader));
 			reader.close();
+			execInit(clazz, obj);
 		} catch (Exception e) {
-			throw new XmlException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 		return obj;
 	}
@@ -109,7 +116,7 @@ public class Jaxb {
 		return true;
 	}
 	
-	public static void write(Object obj , final String xmlFile)throws XmlException{
+	public static void write(Object obj , final String xmlFile){
 		File f = new File(xmlFile);
 		try {
 			if(!f.exists()){
@@ -123,7 +130,7 @@ public class Jaxb {
 			m.marshal(obj, fw);
 			fw.close();
 		} catch (Exception e) {
-			throw new XmlException(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 	
@@ -132,3 +139,5 @@ public class Jaxb {
 	}
 
 }
+
+
