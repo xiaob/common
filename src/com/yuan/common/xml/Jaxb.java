@@ -1,7 +1,7 @@
 package com.yuan.common.xml;
 
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -45,7 +45,7 @@ public class Jaxb {
 		}
 		T obj = null;
 		try {
-			obj = parse(clazz, new FileReader(f));
+			obj = parse(clazz, new FileInputStream(f));
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
@@ -60,7 +60,6 @@ public class Jaxb {
 		try {
 			obj = parse(clazz, new InputStreamReader(is, encoding));
 			is.close();
-			execInit(clazz, obj);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
