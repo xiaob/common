@@ -48,7 +48,6 @@
 	<classpathentry kind="lib" path="lib/jna.jar"/>
 	<classpathentry kind="lib" path="lib/jra-1.0-alpha-4.jar"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.2.2-jdk15.jar"/>
-	<classpathentry kind="lib" path="lib/jsr166y.jar"/>
 	<classpathentry kind="lib" path="lib/kryo-1.03.jar"/>
 	<classpathentry kind="lib" path="lib/kryonet-1.02.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
