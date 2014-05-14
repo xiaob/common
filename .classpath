@@ -114,7 +114,6 @@
 	<classpathentry kind="lib" path="lib/httpclient-cache-4.2.5.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.2.4.jar"/>
 	<classpathentry kind="lib" path="lib/httpmime-4.2.5.jar"/>
-	<classpathentry kind="lib" path="lib/joda-time-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/mina-core-2.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/sshd-core-0.9.0.jar"/>
 	<classpathentry kind="lib" path="lib/libthrift-0.8.0.jar"/>
