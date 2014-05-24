@@ -15,5 +15,9 @@
 			</fileset>
 		</jar>  
 	</target>  
-    
+	<target name="Compile" >
+		<javac srcdir=".\src" destdir=".\bin" source="1.8" target="1.8" encoding="UTF-8" debug="true">
+			
+		</javac>
+	</target>
 </project>  

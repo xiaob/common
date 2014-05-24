@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
+import java.time.OffsetDateTime;
 import java.time.Year;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.TimeZone;
+import java.util.Date;
 
 public class TimeTest {
 
@@ -108,24 +110,41 @@ public class TimeTest {
 	}
 	
 	public static void test3(){
-//		Instant instant = Instant.now();
+		Instant instant = Instant.ofEpochMilli(System.currentTimeMillis());
+		System.out.println(instant);
+		System.out.println(instant.toEpochMilli());
+		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+		System.out.println(localDate.isEqual(localDate));
+		
 		// 时间格式化
 		System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(LocalDateTime.now()));
 		System.out.println(DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDateTime.now()));
 		
 		// 计算日期间隔
-		System.out.println(ChronoUnit.DAYS.between(LocalDateTime.of(2014, 5, 13, 1, 0, 0), LocalDateTime.now()));
-		System.out.println(ChronoUnit.HOURS.between(LocalDateTime.of(2014, 5, 13, 1, 0, 0), LocalDateTime.now()));
+		System.out.println(ChronoUnit.DAYS.between(LocalDateTime.of(2014, 5, 23, 1, 0, 0), LocalDateTime.now()));
+		System.out.println(ChronoUnit.DAYS.between(LocalDateTime.of(2014, 5, 23, 20, 0, 0), LocalDateTime.now()));
+		System.out.println(ChronoUnit.HOURS.between(LocalDateTime.of(2014, 5, 23, 20, 0, 0), LocalDateTime.now()));
 		
 		// 时区
 		System.out.println(ZoneOffset.MAX);
 		System.out.println(ZoneOffset.MIN);
 		System.out.println(ZoneOffset.UTC);
-		System.out.println(ZonedDateTime.now().getZone().getId());
+		System.out.println(ZonedDateTime.now().getOffset());
+		System.out.println(ZonedDateTime.now().getZone());
+		System.out.println(ZoneOffset.ofHours(8));
+		System.out.println(ZoneOffset.of("+08:00"));
+		System.out.println(ZoneId.systemDefault());
+		System.out.println(ZonedDateTime.now().getOffset().getId());
+		System.out.println(ZonedDateTime.now().getOffset().getTotalSeconds());
+		System.out.println("======================");
 		
 		// 日期加减
 		System.out.println(LocalDateTime.now().plusDays(1));
 		System.out.println(LocalDateTime.now().minusHours(1));
+		
+		System.out.println(OffsetDateTime.now());
+		System.out.println(LocalDateTime.now());
+		System.out.println(ZonedDateTime.now());
 	}
 	
 }
