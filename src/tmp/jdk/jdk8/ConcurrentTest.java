@@ -8,7 +8,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.DoubleAdder;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.concurrent.atomic.LongAdder;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class ConcurrentTest {
 
@@ -82,6 +85,7 @@ public class ConcurrentTest {
 		StringBuilder upperCase = fruits.stream().collect(StringBuilder::new,
 				(builder, str) -> builder.append(str.substring(0, 1).toUpperCase()), StringBuilder::append);
 		System.out.println(upperCase.toString());
+		
 	}
 }
 
