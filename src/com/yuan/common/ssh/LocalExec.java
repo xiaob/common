@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 /**
  * 本地命令运行器
- * @author <a href="mailto:cihang.yuan@happyelements.com">cihang.yuan</a>
  * @version 1.0 2014年7月10日
  * @since 1.6
  */

@@ -7,7 +7,6 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 
 /**
- * @author <a href="mailto:cihang.yuan@happyelements.com">cihang.yuan</a>
  * @version 1.0 2014年7月2日
  * @since 1.6
  */
