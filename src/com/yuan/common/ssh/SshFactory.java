@@ -7,6 +7,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 
 /**
+ * @author <a href="mailto:cihang.yuan@happyelements.com">cihang.yuan</a>
  * @version 1.0 2014年7月2日
  * @since 1.6
  */
@@ -27,16 +28,14 @@ public class SshFactory {
 	}
 	
 	public static void main(String[] args)throws Exception{
-		SshSession w2 = SshFactory.openSession("210.242.242.66", 22);
-//		SshSession w3 = SshFactory.openSession("210.242.242.67", 22);
-//		SshSession w5 = SshFactory.openSession("210.242.242.61", 22);
+//		SshSession w2 = new SshSession(jsch, "10.130.130.73", 22, "root", "123456");
+		SshSession w2 = new SshSession(jsch, "210.242.74.137", 22, username, password);
 //		w2.cmd("ls /opt");
-		System.out.println("=============================");
-		w2.get("/opt/rsync_log.sh", "d:/tmp/log.sh");
-//		w3.cmd("ls");
-//		w5.cmd("ls");
+//		w2.cmd("echo www > /tmp/grep/80000000545809/1fu/t_3.txt");
+		w2.cmd("cat /tmp/grep/80000005985380/1fu/protocol* > /tmp/grep/80000005985380/1fu/tmp.txt");
+//		w2.cmd("echo rrr >> /tmp/grep/80000000545809/1fu/tmp.txt");
+//		w2.cmd("grep '11' /tmp/grep/80000000545809/1fu/*");
+//		w2.get("/opt/rsync_log.sh", "d:/tmp/log.sh");
 		w2.close();
-//		w3.close();
-//		w5.close();
 	}
 }
