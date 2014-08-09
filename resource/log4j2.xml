@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+	<Appenders>
+		<!-- 定义控制台输出 -->  
+        <Console name="Console" target="SYSTEM_OUT" follow="true">  
+            <PatternLayout pattern="(%F\:%L)[%-5p] - %m%n" />  
+        </Console>
+		<RollingFile name="RollingFile" fileName="logs/app.log" filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d [%t] %c{2}(%M,%L) [%-5p] - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="250MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20"/>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+	<!--  
+		<Logger name="com.foo.Bar" level="trace" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		-->
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+	</Loggers>
+</Configuration>
