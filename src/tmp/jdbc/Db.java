@@ -32,10 +32,11 @@ public class Db {
 	 * @throws SQLException
 	 */
 	public static Connection mysqlConnection(String host, int port, String db, String user, String password) throws SQLException{
-		String url="jdbc:mysql://{}:{}/{}?useUnicode=true&characterEncoding=utf-8&autoReconnect=true";
+		String url="jdbc:mysql://{0}:{1}/{2}?useUnicode=true&characterEncoding=utf-8&autoReconnect=true";
 		
-		return DriverManager.getConnection(MessageFormat.format(url, host, port, db), user, password);
+		return DriverManager.getConnection(MessageFormat.format(url, host, String.valueOf(port), db), user, password);
 	}
+
 	
 	/**
 	 * 获取数据源
