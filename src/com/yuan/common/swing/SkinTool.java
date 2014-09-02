@@ -8,14 +8,12 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel;
-
 public class SkinTool {
 	
 	public static void substance(){
 //		skin(new SubstanceOfficeBlue2007LookAndFeel());
 //		skin(new SubstanceNebulaLookAndFeel());
-		skin(new SubstanceBusinessBlueSteelLookAndFeel());
+//		skin(new SubstanceBusinessBlueSteelLookAndFeel());
 //		skin(new SubstanceBusinessLookAndFeel());
 //		skin(new SubstanceChallengerDeepLookAndFeel());
 //		skin(new SubstanceCremeCoffeeLookAndFeel());

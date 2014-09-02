@@ -5,11 +5,8 @@ import java.util.List;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCommands;
-import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
 
 public class T1 {
 
@@ -27,36 +24,36 @@ public class T1 {
 	
 	public static void testPool(){
 		JedisPoolConfig config = new JedisPoolConfig();  
-		config.setMaxIdle(5);
-		config.setMaxWaitMillis(1000l);
-		config.setTestOnBorrow(false); 
-		
-		JedisPool pool = new JedisPool(config, "192.168.56.102", 6379);
-		Jedis jedis = pool.getResource();
-		
-		testJedis(jedis);
-		
-		pool.returnResource(jedis);
-		pool.destroy();
+//		config.setMaxIdle(5);
+//		config.setMaxWaitMillis(1000l);
+//		config.setTestOnBorrow(false); 
+//		
+//		JedisPool pool = new JedisPool(config, "192.168.56.102", 6379);
+//		Jedis jedis = pool.getResource();
+//		
+//		testJedis(jedis);
+//		
+//		pool.returnResource(jedis);
+//		pool.destroy();
 	}
 	
 	public static void testShard(){
-		JedisPoolConfig config = new JedisPoolConfig();  
-		config.setMaxIdle(5);
-		config.setMaxWaitMillis(1000l);
-		config.setTestOnBorrow(false); 
+//		JedisPoolConfig config = new JedisPoolConfig();  
+//		config.setMaxIdle(5);
+//		config.setMaxWaitMillis(1000l);
+//		config.setTestOnBorrow(false); 
 		
 		// slave链接
 		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
 		shards.add(new JedisShardInfo("192.168.56.102", 6379, "master"));
 		// 构造池
-		ShardedJedisPool pool = new ShardedJedisPool(config, shards);
-		ShardedJedis jedis = pool.getResource();
+//		ShardedJedisPool pool = new ShardedJedisPool(config, shards);
+//		ShardedJedis jedis = pool.getResource();
 		
-		testJedis(jedis);
-		
-		pool.returnResource(jedis);
-		pool.destroy();
+//		testJedis(jedis);
+//		
+//		pool.returnResource(jedis);
+//		pool.destroy();
 	}
 	
 	public static void testJedis(JedisCommands jedis){

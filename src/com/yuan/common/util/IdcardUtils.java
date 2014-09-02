@@ -24,15 +24,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * 身份证工具类
  * 
  * @author June
  * @version 1.0, 2010-06-17
  */
-public class IdcardUtils extends StringUtils {
+public class IdcardUtils  {
 
     /** 中国公民身份证号码最小长度。 */
     public static final int CHINA_ID_MIN_LENGTH = 15;

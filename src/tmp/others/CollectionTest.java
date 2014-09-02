@@ -11,6 +11,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -27,8 +28,6 @@ import java.util.concurrent.Exchanger;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.Semaphore;
-
-import com.sun.tools.jdi.LinkedHashMap;
 
 
 public class CollectionTest {
