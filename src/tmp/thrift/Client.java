@@ -6,8 +6,6 @@ import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
-import tmp.thrift.gen.SecondService;
-
 public class Client {
 
 	public static void main(String[] args)throws Exception {
@@ -17,9 +15,9 @@ public class Client {
         // 设置传输协议为 TBinaryProtocol 
         TProtocol protocol = new TBinaryProtocol(transport); 
         
-        SecondService.Client client = new SecondService.Client(protocol); 
-        client.blahBlah(); 
-        System.out.println(client.testString("1111"));
+//        SecondService.Client client = new SecondService.Client(protocol); 
+//        client.blahBlah(); 
+//        System.out.println(client.testString("1111"));
         
         transport.close(); 
 	}

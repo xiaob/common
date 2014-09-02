@@ -1,10 +1,6 @@
 package com.yuan.common.log;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import com.yuan.common.util.SystemTool;
 
@@ -30,17 +26,17 @@ public class Log4j {
 		}
 		
 		System.out.println("logFileName = " + logFileName);
-		PropertyConfigurator.configure(logFileName);
+//		PropertyConfigurator.configure(logFileName);
 	}
 	
 	public static void main(String args[])throws Exception{
 		Log4j.load(Log4j.class, "src");
-		final Logger log = Logger.getLogger(Log4j.class);
-		
-		while(true){
-			TimeUnit.SECONDS.sleep(1);
-			log.info("11111111111111");
-		}
+//		final Logger log = Logger.getLogger(Log4j.class);
+//		
+//		while(true){
+//			TimeUnit.SECONDS.sleep(1);
+//			log.info("11111111111111");
+//		}
 	}
 	
 }

@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.yuan.common.async.AsyncService;
 import com.yuan.common.compress.ZipEntryOutputStream;
@@ -21,7 +22,7 @@ import com.yuan.common.util.DateUtil;
 
 
 public class MysqlTool {
-	private static final Logger logger = Logger.getLogger(MysqlTool.class);
+	private static final Logger logger = LogManager.getLogger(MysqlTool.class);
 	private final AsyncService service = new AsyncService(1);
 	private long size = 0L;
 	private String host;
