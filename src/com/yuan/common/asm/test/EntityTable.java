@@ -2,11 +2,8 @@ package com.yuan.common.asm.test;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
-
-@Entity
+//@Entity
 public class EntityTable  {
 
 	public String entityName; //实体名
@@ -18,7 +15,7 @@ public class EntityTable  {
 	public String appId; //应用标识
 	public String version; //应用版本
 	
-	@OneToMany
+//	@OneToMany
 	public List<PropertyType> propertyList;
 	
 	public EntityTable(){

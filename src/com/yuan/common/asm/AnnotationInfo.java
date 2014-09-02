@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.cxf.binding.corba.wsdl.Object;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
 

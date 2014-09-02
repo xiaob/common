@@ -1,8 +1,5 @@
 package com.yuan.common.asm.aop.example;
 
-import javax.persistence.Entity;
-
-import com.yuan.common.asm.AnnotationInfo;
 import com.yuan.common.asm.ClassUtil;
 import com.yuan.common.asm.DynamicClass;
 
@@ -21,7 +18,7 @@ public class Test1 {
 	
 	public static void test()throws Exception{
 		DynamicClass dc = new DynamicClass("com/hx/User");
-		dc.addClassAnnotation(new AnnotationInfo(Entity.class));
+//		dc.addClassAnnotation(new AnnotationInfo(Entity.class));
 		dc.addField(String.class, null, "name");
 //		dc.addField(List.class, PropertyType.class, "propertyList", OneToMany.class);
 		
